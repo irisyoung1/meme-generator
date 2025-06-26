@@ -7,7 +7,7 @@ This project generates meme images from quotes and photos, with both a command-l
 - pip
 
 ## Setup
-1. **Download project zip file**
+1. **Download/ Clone project**
 2. **Create and activate a virtual environment (recommended):**
    ```sh
    python -m venv .env-meme-gen
