@@ -18,9 +18,11 @@ meme = MemeEngine(current_dir / "static")
 def setup():
     """Load all resources."""
     Ingestor.register_defaults()
-    return Ingestor.scan(current_dir / "_data/DogQuotes"), MemeEngine.find_images(
+    quotes = Ingestor.scan(current_dir / "_data/DogQuotes")
+    images = MemeEngine.find_images(
         current_dir / "_data/photos/dog/"
     )
+    return quotes, images
 
 
 quotes, imgs = setup()
@@ -30,8 +32,13 @@ quotes, imgs = setup()
 def meme_rand():
     """Generate a random meme."""
     img, quote = (random.choice(item) for item in (imgs, quotes))
-    meme_path = meme.make_meme(img, quote.body, quote.author)
-    return render_template("meme.html", path=Path(meme_path).relative_to(current_dir))
+    meme_path = meme.make_meme(
+        img, quote.body, quote.author
+    )
+    return render_template(
+        "meme.html",
+        path=Path(meme_path).relative_to(current_dir)
+    )
 
 
 @app.route("/create", methods=["GET"])
@@ -55,7 +62,8 @@ def meme_post():
         extension = ".bmp"
     if not extension:
         raise ValueError(
-            f"Unsupported content type: {content_type} for {image_url} (is it an image?)"
+            f"Unsupported content type: {content_type} "
+            f"for {image_url} (is it an image?)"
         )
     tf = tempfile.NamedTemporaryFile(suffix=extension, delete=False)
     try:

@@ -28,12 +28,17 @@ class IngestorInterface(ABC):
 
     @classmethod
     def scan(cls, path) -> List[QuoteModel]:
-        """Scan the input path, including subfolders, and parse all supported files for quotes."""
+        """Scan the input path, including subfolders.
+
+        Parse all supported files for quotes.
+        """
         quotes = []
         for dir, _, files in os.walk(path):
             for f in files:
                 if cls.can_ingest(f):
-                    quotes.extend(cls.parse(Path(dir) / f))
+                    quotes.extend(
+                        cls.parse(Path(dir) / f)
+                    )
         return quotes
 
     @classmethod
@@ -41,3 +46,9 @@ class IngestorInterface(ABC):
     def _parse(cls, path) -> List[QuoteModel]:
         """Format-specific parsing logic goes here."""
         raise NotImplementedError
+
+    @classmethod
+    @abstractmethod
+    def parse(cls, path) -> List[QuoteModel]:
+        """Parse a file and return a list of QuoteModel objects."""
+        pass

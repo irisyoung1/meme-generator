@@ -19,5 +19,7 @@ class DocxIngestor(IngestorInterface):
         """Parse quotes from file."""
         doc = docx.Document(path)
         return [
-            QuoteModel(m[1], m[2]) for p in doc.paragraphs for m in cls.quote_regex.finditer(p.text)
+            QuoteModel(m[1], m[2])
+            for p in doc.paragraphs
+            for m in cls.quote_regex.finditer(p.text)
         ]

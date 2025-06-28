@@ -35,7 +35,7 @@ Start the web server:
 ```sh
 python src/app.py
 ```
-Then open your browser to [http://localhost:3000](http://localhost:3000) or [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
+Then open your browser and follow the running port. In my case it is [http://localhost:5000](http://localhost:5000) or [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ## Linting and Testing
 - **Lint code and docstrings:**

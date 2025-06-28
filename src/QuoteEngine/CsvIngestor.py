@@ -16,5 +16,7 @@ class CsvIngestor(IngestorInterface):
     def _parse(cls, path) -> List[QuoteModel]:
         """Parse quotes from file."""
         return (
-            pd.read_csv(path).apply(lambda row: QuoteModel(row.body, row.author), axis=1).tolist()
+            pd.read_csv(path)
+            .apply(lambda row: QuoteModel(row.body, row.author), axis=1)
+            .tolist()
         )
